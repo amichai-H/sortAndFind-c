@@ -87,7 +87,7 @@ int similar (char *s, char *t, int n){
                 count++;
             }
         }
-        if(it-1==sizeT && sizeS-is+count<=n ){
+        if(it-1==sizeT && sizeS-is+count<n ){
             return 1;
         } else return 0;
     }

@@ -17,7 +17,7 @@ int sizeOfStr(char *s){
         i++;
     }
 
-    return i-1;
+    return (i-1);
 }
 
 int Getline(char s[]){

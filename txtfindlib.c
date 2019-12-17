@@ -4,6 +4,7 @@
 
 #include "txtfindlib.h"
 #include <stdio.h>
+#include <string.h>
 
 #define LINE 256
 
@@ -11,11 +12,12 @@
 
 
 int sizeOfStr(char *s){
-    int size = 0;
-    for (int i = 0; *(s+i)!= '\0';i++){
-        size = i;
+    int i = 0;
+    while (*(s+i)){
+        i++;
     }
-    return size;
+
+    return i-1;
 }
 
 int Getline(char s[]){
@@ -27,6 +29,7 @@ int Getline(char s[]){
         i++;
         scanf("%c" , &c);
     }
+    s[i] = '\0';
     return i;
 }
 
@@ -39,6 +42,7 @@ int Getword(char w[]){
         i++;
         scanf("%c" , &c);
     }
+    w[i] = '\0';
     return i;
 }
 
@@ -64,71 +68,52 @@ int substring( char * str1, char * str2){
 
 }
 
-int substringLike( char * str1, char * str2){
-    int size2 = sizeOfStr(str2);
-    int size1 = sizeOfStr(str1);
-    int here = 0;
 
-   if(size1<=size2) {
-       return 0;
-   }
-   for (int i = 0; i<=size2;i++){
-       for (int j = here; j <= size1; j++) {
-           if(*(str1+j) == *(str2+i)){
-               here = j+1;
-               j = size1+1;
-           }
-       }
-   }
-   if(here == size2){
-       return 1;
-   }
-    return 0;
-}
 int similar (char *s, char *t, int n){
-    int ok = substringLike(s,t);
-    if(ok){
-        int size2 = 0;
-        int size1 = 0;
-        int here = 0;
-        for (int i = 0; *(t+i)!= '\0';i++){
-            size2 = i;
+    if(strcmp(s,t)==0){
+        return 1;
+    } else{
+        int sizeS = sizeOfStr(s);
+        int sizeT = sizeOfStr(t);
+        int is = 0;
+        int it = 0;
+        int count = 0;
+        while (is<=sizeS && it<=sizeT){
+            if(*(s+is) == *(t+it)){
+                is++;
+                it++;
+            } else{
+                is++;
+                count++;
+            }
         }
-        for (int i = 0; *(s+i)!= '\0';i++){
-            size1 = i;
-        }
-        if (size1-size2>n) return 1;
-        else return 0;
+        if(it-1==sizeT && sizeS-is+count<=n ){
+            return 1;
+        } else return 0;
     }
-    return 0;
+
 }
 void print_lines(char * str){
     char s[LINE];
-    int j =0;
     int size=0;
     for (int i = 0; i <250 ; i++) {
         size = Getline(s);
         if(substring(s,str)){
-            j = 0;
-            for (int k = 0; k <=size ; k++) {
-                printf("%c\n", *(s + k));
-            }
+            printf("%s\n", s);
         }
     }
 
 }
 
-void print_similar_words(char * str){
-    while (!EOF){
+void print_similar_words(char *str){
+    int i=0;
+    while (i<250*256){
+        i++;
         char s[WORD];
-        int size = Getword(s);
+        Getword(s);
         if(similar(s,str,1)){
-            int j = 0;
-            for (int k = 0; k <=size ; k++) {
-                printf("%c\n", *(s + k));
-            }
+            printf("%s\n", s);
         }
     }
 
 }
-

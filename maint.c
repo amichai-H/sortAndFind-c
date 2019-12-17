@@ -7,21 +7,13 @@
 int main() {
     char in;
     char s[MYWORD];
-    printf("OK");
-    scanf(" %c\n" , &in);
-    int index = 0;
-    while(in != ' '){
-        s[index] = in;
-        index++;
-        scanf(" %c\n" , &in);
-    }
-    s[index] = '\0';
+    Getword(s);
     scanf(" %c\n" , &in);
 
     if(in == 'a'){
         print_lines(s);
     }
-    else{
+    if(in == 'b'){
         print_similar_words(s);
     }
     return 0;

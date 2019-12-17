@@ -15,7 +15,6 @@ int Getline(char s[]);
 int Getword(char w[]);
 
 int substring( char * str1, char * str2);
-int substringLike( char * str1, char * str2);
 int sizeOfStr(char *s);
 
 int similar (char *s, char *t, int n);

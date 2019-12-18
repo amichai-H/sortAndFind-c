@@ -8,7 +8,6 @@ int main(){
     int arr[Len];
     int temp;
     for(int i  = 0; i<Len;i++){
-        printf("Enter a number:\n");
         scanf(" %d",&temp);
         *(arr+i) = temp;
     }
